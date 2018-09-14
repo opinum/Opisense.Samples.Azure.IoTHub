@@ -1,0 +1,24 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+
+    "AzureWebJobsStorage": "",
+    "AzureWebJobsDashboard": "",
+
+    "EventHub": "",
+
+    "AzureIotHub": "",
+
+    // Opisense IoT Settings
+    "DefaultSiteIdForNewSources": "",
+    "OpisenseUsername": "",
+    "OpisensePassword": "",
+    "OpisenseApi": "https://api.opinum.com/",
+    "OpisenseIdentity": "https://identity.opinum.com/",
+    "OpisenseClientId": "",
+    "OpisenseClientSecret": "",
+
+    "OpisensePush": "https://push.opinum.com/api/"
+  }
+}

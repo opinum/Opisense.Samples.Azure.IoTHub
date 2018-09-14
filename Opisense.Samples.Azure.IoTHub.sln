@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Opisense.Samples.Azure.IoTHub.DevicesCreatedFromIoTHub", "DevicesCreatedFromIoTHub\Opisense.Samples.Azure.IoTHub.DevicesCreatedFromIoTHub.csproj", "{D4F59E66-1DF9-4758-9B15-62157743BAFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense", "DevicesCreatedFromOpisense\Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense.csproj", "{75114730-3C5F-455E-BB56-CB30DE3C6168}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4F59E66-1DF9-4758-9B15-62157743BAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F59E66-1DF9-4758-9B15-62157743BAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F59E66-1DF9-4758-9B15-62157743BAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F59E66-1DF9-4758-9B15-62157743BAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75114730-3C5F-455E-BB56-CB30DE3C6168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75114730-3C5F-455E-BB56-CB30DE3C6168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75114730-3C5F-455E-BB56-CB30DE3C6168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75114730-3C5F-455E-BB56-CB30DE3C6168}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14FBA16E-911B-4FFE-9244-8031604F8A92}
+	EndGlobalSection
+EndGlobal
