@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using Opisense.Client;
 
 namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromIoTHub
@@ -14,13 +14,13 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromIoTHub
 
         [FunctionName("OnCreateOrDeleteDevice")]
         public static async Task RunCreateDeleteDevice([EventHubTrigger("createdelete", Connection = "EventHub")]
-            EventData[] messages, TraceWriter log)
+            EventData[] messages, ILogger log)
         {
             foreach (var message in messages.Deserialize<dynamic>())
             {
                 if (message.eventType == "Microsoft.Devices.DeviceCreated")
                 {
-                    log.Info("Received DeviceCreated message. Will create source and variables");
+                    log.LogInformation("Received DeviceCreated message. Will create source and variables");
 
                     var sourceId = await OpisenseClient.CreateOpisenseSource(new
                     {
@@ -51,11 +51,11 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromIoTHub
                             mappingConfig = "humidity"
                         }
                     });
-                    log.Info($"Successfully created source<{sourceId}>");
+                    log.LogInformation($"Successfully created source<{sourceId}>");
                 }
                 else
                 {
-                    log.Info($"Received <{message.eventType}> message. Ignoring...");
+                    log.LogInformation($"Received <{message.eventType}> message. Ignoring...");
                 }
             }
         }

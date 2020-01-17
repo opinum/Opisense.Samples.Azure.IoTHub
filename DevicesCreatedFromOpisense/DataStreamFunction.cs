@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Opisense.Client;
 
@@ -13,7 +13,7 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense
     {
         [FunctionName("OnDataStream")]
         public static async Task RunDataStream([EventHubTrigger("datahub", Connection = "EventHub")]
-            EventData[] messages, TraceWriter log)
+            EventData[] messages, ILogger log)
         {
             var data = new List<OpisenseData>();
             foreach (var eventData in messages)

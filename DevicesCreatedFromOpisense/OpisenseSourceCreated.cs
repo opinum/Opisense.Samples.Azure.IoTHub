@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Opisense.Client;
 
@@ -21,13 +21,13 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense
         static readonly string connString = Environment.GetEnvironmentVariable("AzureIotHub", EnvironmentVariableTarget.Process);
 
         [FunctionName("OpisenseSourceCreated")]
-        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, TraceWriter log)
+        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, ILogger log)
         {
             string requestBody = new StreamReader(req.Body).ReadToEnd();
             dynamic source = JsonConvert.DeserializeObject(requestBody);
             if (source == null)
             {
-                log.Error("Request Body cannot be empty");
+                log.LogError("Request Body cannot be empty");
                 return new BadRequestObjectResult("Request Body cannot be empty");
             }
 
@@ -36,13 +36,13 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense
 
             if (string.IsNullOrWhiteSpace(meterNumber))
             {
-                log.Error("Meter Number cannot be empty");
+                log.LogError("Meter Number cannot be empty");
                 return new BadRequestObjectResult("Meter Number cannot be empty");
             }
 
             if (!id.HasValue)
             {
-                log.Error("Id cannot be empty");
+                log.LogError("Id cannot be empty");
                 return new BadRequestObjectResult("Id cannot be empty");
             }
 
@@ -50,26 +50,26 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense
             {
                 registryManager = RegistryManager.CreateFromConnectionString(connString);
 
-                log.Info("Creating device");
+                log.LogInformation("Creating device");
 
                 var primaryKey = await CreateDeviceIdentity(meterNumber, log);
 
                 var patchDocument = new JsonPatchDocument();
                 patchDocument.Add("/clientData/IoT Hub Info/Security/Primary Key", primaryKey);
 
-                log.Info("Patching Source");
+                log.LogInformation("Patching Source");
                 await OpisenseClient.PatchOpisenseSource(id.Value, patchDocument);
 
                 return new OkObjectResult($"Device {meterNumber} created.");
             }
             catch (Exception e)
             {
-                log.Error(e.Message, e);
+                log.LogError(e.Message, e);
                 return new ExceptionResult(e, true);
             }
         }
 
-        private static async Task<string> CreateDeviceIdentity(string deviceId, TraceWriter log)
+        private static async Task<string> CreateDeviceIdentity(string deviceId, ILogger log)
         {
             var device = new Device(deviceId);
             var newDevice = new Device();
@@ -98,7 +98,7 @@ namespace Opisense.Samples.Azure.IoTHub.DevicesCreatedFromOpisense
             }
             catch (Exception e)
             {
-                log.Error(e.Message, e);
+                log.LogError(e.Message, e);
             }
 
             return newDevice.Authentication.SymmetricKey.PrimaryKey;
