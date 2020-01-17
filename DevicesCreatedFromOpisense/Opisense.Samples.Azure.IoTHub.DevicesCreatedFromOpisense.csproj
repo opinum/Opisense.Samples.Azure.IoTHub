@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Azure.Devices" Version="1.18.2" />
-    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventHubs" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventHubs" Version="3.0.3" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.2" />
     <PackageReference Include="Opisense.Client" Version="1.0.0" />
   </ItemGroup>
